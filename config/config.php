@@ -30,7 +30,6 @@ return [
             'class'   => 'yii\db\Connection',
             'charset' => 'utf8',
         ],
-
-        'params' => $params,
     ],
+    'params'  => $params,
 ];
