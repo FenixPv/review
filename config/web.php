@@ -23,22 +23,14 @@ $config = [
         'log'          => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
         ],
-
+        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
-            'showScriptName'  => false,
-            'rules'           => [
-                '<_c:[\w\-]+>/<id:\d+>'              => '<_c>/view',
-                '<_c:[\w\-]+>'                       => '<_c>/index',
-                '<_c:[\w\-]+>/<_a:[\w\-]+>/<id:\d+>' => '<_c>/<_a>',
-            ],
-            'cache' => [
-                'class' => 'yii\caching\FileCache',
-                'cachePath' => '@app/cache/urlManager',
-                'defaultDuration' => 60
+            'showScriptName' => false,
+            'rules' => [
             ],
         ],
-
+        */
     ],
 ];
 
