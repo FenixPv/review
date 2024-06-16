@@ -16,8 +16,11 @@ require __DIR__ . '/../../vendor/yiisoft/yii2/Yii.php';
 
 $config = yii\helpers\ArrayHelper::merge(
     require __DIR__ . '/../../config/console.php',
-    require __DIR__ . '/../../config/config.php',
-    require __DIR__ . '/../../config/test.php'
+    [
+        'components' => [
+            'db' => require __DIR__ . '/../../config/test_db.php'
+        ]
+    ]
 );
 
 
