@@ -18,7 +18,7 @@ use yii\web\IdentityInterface;
  * @property int $updated_at
  * @property string $username
  * @property string|null $auth_key
- * @property string|null $email_confirm_token
+ * @property string|null $verification_token
  * @property string $password_hash
  * @property string|null $password_reset_token
  * @property string $email
@@ -34,6 +34,7 @@ class User extends ActiveRecord implements IdentityInterface
     const int STATUS_ACTIVE = 1;
     const int STATUS_WAIT = 2;
 
+    public ?string $verification_token =null;
     /**
      * {@inheritdoc}
      */
@@ -237,12 +238,12 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @param string $email_confirm_token
+     * @param string $verification_token
      * @return static|null
      */
-    public static function findByEmailConfirmToken(string $email_confirm_token): null|static
+    public static function findByEmailConfirmToken(string $verification_token): null|static
     {
-        return static::findOne(['email_confirm_token' => $email_confirm_token, 'status' => self::STATUS_WAIT]);
+        return static::findOne(['verification_token' => $verification_token, 'status' => self::STATUS_WAIT]);
     }
 
     /**
@@ -251,7 +252,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function generateEmailVerificationToken(): void
     {
-        $this->email_confirm_token = Yii::$app->security->generateRandomString();
+        $this->verification_token = Yii::$app->security->generateRandomString();
     }
 
     /**
@@ -259,6 +260,6 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function removeEmailConfirmToken(): void
     {
-        $this->email_confirm_token = null;
+        $this->verification_token = null;
     }
 }

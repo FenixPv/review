@@ -65,10 +65,13 @@ class SignupForm extends Model
         return Yii::$app
             ->mailer
             ->compose(
-                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
-                ['user' => $user]
+                [
+                    'html' => '@app/modules/user/mail/emailVerify-html',
+                    'text' => '@app/modules/user/mail/emailVerify-text',
+                ],
+                ['user' => $user],
             )
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->name . ' robot'])
             ->setTo($this->email)
             ->setSubject('Account registration at ' . Yii::$app->name)
             ->send();
