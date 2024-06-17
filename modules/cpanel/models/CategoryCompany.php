@@ -9,8 +9,10 @@ use Yii;
  *
  * @property int $id
  * @property string|null $name
+ *
+ * @property Company[] $companies
  */
-class Category extends \yii\db\ActiveRecord
+class CategoryCompany extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -39,5 +41,15 @@ class Category extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
         ];
+    }
+
+    /**
+     * Gets query for [[Companies]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCompanies()
+    {
+        return $this->hasMany(Company::class, ['category_id' => 'id']);
     }
 }
