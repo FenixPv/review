@@ -4,10 +4,13 @@ namespace app\modules\user\controllers;
 
 use app\modules\user\models\LoginForm;
 use app\modules\user\models\SignupForm;
+use app\modules\user\models\VerifyEmailForm;
+use yii\base\InvalidArgumentException;
 use Yii;
 use yii\db\Exception;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -48,7 +51,7 @@ class DefaultController extends Controller
      * Renders the index view for the module
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         return $this->render('index');
     }
@@ -58,7 +61,7 @@ class DefaultController extends Controller
      *
      * @return Response|string
      */
-    public function actionLogin()
+    public function actionLogin(): Response|string
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -80,7 +83,7 @@ class DefaultController extends Controller
      *
      * @return Response
      */
-    public function actionLogout()
+    public function actionLogout(): Response
     {
         Yii::$app->user->logout();
 
@@ -104,5 +107,29 @@ class DefaultController extends Controller
         return $this->render('signup', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * Verify email address
+     *
+     * @param string $token
+     * @return yii\web\Response
+     * @throws BadRequestHttpException
+     * @throws Exception
+     */
+    public function actionVerifyEmail(string $token): Response
+    {
+        try {
+            $model = new VerifyEmailForm($token);
+        } catch (InvalidArgumentException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+        if (($user = $model->verifyEmail()) && Yii::$app->user->login($user)) {
+            Yii::$app->session->setFlash('success', 'Your email has been confirmed!');
+            return $this->goHome();
+        }
+
+        Yii::$app->session->setFlash('error', 'Sorry, we are unable to verify your account with provided token.');
+        return $this->goHome();
     }
 }

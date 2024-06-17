@@ -54,7 +54,7 @@ $config = [
             'showScriptName'  => false,
             'rules'           => [
                 ''                    => 'site/default/index',
-                '<_a:(login|logout|signup)>' => 'user/default/<_a>',
+                '<_a:(login|logout|signup|verify-email)>' => 'user/default/<_a>',
 
                 '<_m:[\w\-]+>'                                    => '<_m>/default/index',
                 '<_m:[\w\-]+>/<id:\d+>'                           => '<_m>/default/view',
