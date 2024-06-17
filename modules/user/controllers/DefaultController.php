@@ -3,6 +3,7 @@
 namespace app\modules\user\controllers;
 
 use app\modules\user\models\LoginForm;
+use app\modules\user\models\ResendVerificationEmailForm;
 use app\modules\user\models\SignupForm;
 use app\modules\user\models\VerifyEmailForm;
 use yii\base\InvalidArgumentException;
@@ -68,6 +69,7 @@ class DefaultController extends Controller
         }
 
         $model = new LoginForm();
+        /** @var LoginForm $model */
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
@@ -131,5 +133,22 @@ class DefaultController extends Controller
 
         Yii::$app->session->setFlash('error', 'Sorry, we are unable to verify your account with provided token.');
         return $this->goHome();
+    }
+
+
+    public function actionResendVerificationEmail(): Response|string
+    {
+        $model = new ResendVerificationEmailForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->sendEmail()) {
+                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                return $this->goHome();
+            }
+            Yii::$app->session->setFlash('error', 'Sorry, we are unable to resend verification email for the provided email address.');
+        }
+
+        return $this->render('resendVerificationEmail', [
+            'model' => $model
+        ]);
     }
 }
