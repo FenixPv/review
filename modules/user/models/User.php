@@ -249,7 +249,7 @@ class User extends ActiveRecord implements IdentityInterface
      * Generates email confirmation token
      * @throws \yii\base\Exception
      */
-    public function generateEmailConfirmToken(): void
+    public function generateEmailVerificationToken(): void
     {
         $this->email_confirm_token = Yii::$app->security->generateRandomString();
     }
