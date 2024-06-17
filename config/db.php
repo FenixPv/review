@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
+    'class'    => 'yii\db\Connection',
+    'dsn'      => 'sqlite:@app/sqlite.db',
     'username' => 'root',
-    'password' => '',
-    'charset' => 'utf8',
+    //    'password' => '',
+    //    'charset' => 'utf8',
 
     // Schema cache options (for production environment)
     //'enableSchemaCache' => true,
