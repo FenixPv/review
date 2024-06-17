@@ -38,7 +38,7 @@ class m240617_202504_create_comment_table extends Migration
             'user_id'
         );
         $this->createIndex(
-            'idx-company_id',
+            'idx-comment_company_id',
             'comment',
             'company_id'
         );
