@@ -2,6 +2,7 @@
 
 namespace app\modules\cpanel\models;
 
+use app\modules\user\models\User;
 use Yii;
 
 /**
