@@ -1,6 +1,7 @@
 <?php
 
 /** @var yii\web\View $this */
+/** @var string $content */
 
 use app\assets\AppAsset;
 use yii\bootstrap5\Html;
@@ -12,7 +13,7 @@ $this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
 $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, shrink-to-fit=no']);
 $this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
 $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
-$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => Yii::getAlias('@web/favicon.png')]);
+$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/favicon.ico')]);
 
 $this->beginPage();
 
@@ -28,10 +29,9 @@ $this->beginPage();
 <body>
 <?php
 $this->beginBody();
-$this->beginContent('@app/modules/cpanel/views/layouts/header.php');
+$this->beginContent('@app/modules/cpanel/views/layouts/header.php', [$content]);
 $this->endContent();
-$this->beginContent('@app/modules/cpanel/views/layouts/body.php');
-$this->endContent();
+echo $content;
 $this->beginContent('@app/modules/cpanel/views/layouts/footer.php');
 $this->endContent();
 $this->endBody();
