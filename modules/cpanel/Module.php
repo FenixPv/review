@@ -11,7 +11,7 @@ class Module extends \yii\base\Module
      * {@inheritdoc}
      */
     public $controllerNamespace = 'app\modules\cpanel\controllers';
-
+    public $layout = '@app/modules/cpanel/views/layouts/main.php';
     /**
      * {@inheritdoc}
      */
