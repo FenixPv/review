@@ -1,21 +1,44 @@
-<header class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/cpanel">Cpanel</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/cpanel/user">User</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cpanel/company">Company</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cpanel/category-company">Category</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+<header id="header">
+    <?php
+
+    use yii\bootstrap5\Nav;
+    use yii\bootstrap5\NavBar;
+
+    NavBar::begin([
+        'brandLabel' => 'Контрольная панель',
+        'brandUrl'   => '/cpanel',
+        'options'    => ['class' => 'navbar-expand-md navbar-dark bg-dark sticky-top']
+    ]);
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav'],
+        'items' => [
+            [
+                'label' =>'Пользователи', 'url' => ['#'],
+                'items' => [
+                    ['label' => 'Все пользователи', 'url' => ['/cpanel/user']],
+                    ['label' => 'Добавить пользователя', 'url' => ['/cpanel/user/create']],
+                ],
+            ],
+            [
+                'label' =>'Компании', 'url' => ['#'],
+                'items' => [
+                    ['label' => 'Категории компаний', 'url' => ['/cpanel/category-company']],
+                    ['label' => 'Добавить категорию', 'url' => ['/cpanel/category-company/create']],
+                    ['label' => 'Все компании', 'url' => ['/cpanel/company']],
+                    ['label' => 'Добавить новую', 'url' => ['/cpanel/company/create']],
+                ],
+            ],
+            [
+                'label' =>'Отзывы', 'url' => ['#'],
+                'items' => [
+                    ['label' => 'Категории компаний', 'url' => ['/cpanel/category-company']],
+                    ['label' => 'Добавить категорию', 'url' => ['/cpanel/category-company/create']],
+                    ['label' => 'Все компании', 'url' => ['/cpanel/company']],
+                    ['label' => 'Добавить новую', 'url' => ['/cpanel/company/create']],
+                ],
+            ],
+        ],
+    ]);
+    NavBar::end();
+    ?>
 </header>
