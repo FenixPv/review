@@ -35,11 +35,12 @@ $this->beginPage();
     $this->endContent();
 
     echo '<main>';
-
     if (!empty($this->params['breadcrumbs'])) {
         echo Breadcrumbs::widget([
+            'homeLink' => ['label' => 'Cpanel', 'url' => '/cpanel'],
             'links'   => $this->params['breadcrumbs'],
-            'options' => ['class' => 'text-bg-light p-3']
+            'itemTemplate' => "<li class=\"breadcrumb-item\">{link}</li>\n",
+            'options' => ['class' => 'text-bg-light p-3',],
         ]);
     }
 
