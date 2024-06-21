@@ -1,9 +1,11 @@
 <?php
 
 /** @var yii\web\View $this */
+
 /** @var string $content */
 
 use app\assets\AppAsset;
+use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 
 AppAsset::register($this);
@@ -18,25 +20,36 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 $this->beginPage();
 
 ?>
-<!DOCTYPE html>
-<html lang="<?php echo Yii::$app->language ?>" class="h-100">
-<head>
-    <title>
-        <?php echo Html::encode($this->title) ?>
-    </title>
-    <?php $this->head() ?>
-</head>
-<body>
-<?php
-$this->beginBody();
-$this->beginContent('@app/modules/cpanel/views/layouts/header.php', [$content]);
-$this->endContent();
-echo $content;
-$this->beginContent('@app/modules/cpanel/views/layouts/footer.php');
-$this->endContent();
-$this->endBody();
-?>
-</body>
-</html>
+    <!DOCTYPE html>
+    <html lang="<?php echo Yii::$app->language ?>" class="h-100">
+    <head>
+        <title>
+            <?php echo Html::encode($this->title) ?>
+        </title>
+        <?php $this->head() ?>
+    </head>
+    <body>
+    <?php
+    $this->beginBody();
+    $this->beginContent('@app/modules/cpanel/views/layouts/header.php', [$content]);
+    $this->endContent();
+
+    echo '<main>';
+
+    if (!empty($this->params['breadcrumbs'])) {
+        echo Breadcrumbs::widget([
+            'links'   => $this->params['breadcrumbs'],
+            'options' => ['class' => 'text-bg-light p-3']
+        ]);
+    }
+
+    echo $content;
+    echo '</main>';
+    $this->beginContent('@app/modules/cpanel/views/layouts/footer.php');
+    $this->endContent();
+    $this->endBody();
+    ?>
+    </body>
+    </html>
 <?php
 $this->endPage();
