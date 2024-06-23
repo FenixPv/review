@@ -32,10 +32,8 @@
             [
                 'label' => 'Отзывы', 'url' => ['#'],
                 'items' => [
-                    ['label' => 'Категории компаний', 'url' => ['/cpanel/category-company']],
-                    ['label' => 'Добавить категорию', 'url' => ['/cpanel/category-company/create']],
-                    ['label' => 'Все компании', 'url' => ['/cpanel/company']],
-                    ['label' => 'Добавить новую', 'url' => ['/cpanel/company/create']],
+                    ['label' => 'Комментарии', 'url' => ['/cpanel/comment']],
+                    ['label' => 'Добавить комментарий', 'url' => ['/cpanel/comment/create']],
                 ],
             ],
         ],
