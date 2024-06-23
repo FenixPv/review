@@ -5,22 +5,23 @@
     use yii\bootstrap5\NavBar;
 
     NavBar::begin([
-        'brandLabel' => 'Контрольная панель',
-        'brandUrl'   => '/cpanel',
-        'options'    => ['class' => 'navbar-expand-md navbar-dark bg-dark sticky-top']
+        'innerContainerOptions' => ['class' => 'container-fluid d-lg-block text-center'],
+        'brandLabel'       => 'Контрольная панель',
+        'brandUrl'         => '/cpanel',
+        'options'          => ['class' => 'navbar-expand-lg navbar-dark bg-dark sticky-top'],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
-        'items' => [
+        'options' => ['class' => 'navbar-nav d-block d-lg-none'],
+        'items'   => [
             [
-                'label' =>'Пользователи', 'url' => ['#'],
+                'label' => 'Пользователи', 'url' => ['#'],
                 'items' => [
                     ['label' => 'Все пользователи', 'url' => ['/cpanel/user']],
                     ['label' => 'Добавить пользователя', 'url' => ['/cpanel/user/create']],
                 ],
             ],
             [
-                'label' =>'Компании', 'url' => ['#'],
+                'label' => 'Компании', 'url' => ['#'],
                 'items' => [
                     ['label' => 'Категории компаний', 'url' => ['/cpanel/category-company']],
                     ['label' => 'Добавить категорию', 'url' => ['/cpanel/category-company/create']],
@@ -29,7 +30,7 @@
                 ],
             ],
             [
-                'label' =>'Отзывы', 'url' => ['#'],
+                'label' => 'Отзывы', 'url' => ['#'],
                 'items' => [
                     ['label' => 'Категории компаний', 'url' => ['/cpanel/category-company']],
                     ['label' => 'Добавить категорию', 'url' => ['/cpanel/category-company/create']],
