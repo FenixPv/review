@@ -12,17 +12,17 @@ use yii\widgets\Pjax;
 /** @var app\modules\cpanel\models\SearchUser $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Users';
+$this->title = 'Пользователи';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="user-index">
-
-    <h1><?php echo Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="d-flex justify-content-between">
+        <h1><?php echo Html::encode($this->title) ?></h1>
+        <p>
+            <?php echo Html::a('Новый пользователь', ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
+    </div>
 
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -31,15 +31,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel'  => $searchModel,
         'columns'      => [
-
-            'id',
-            'username',
+            [
+                'attribute'      => 'id',
+                'contentOptions' => ['style' => 'text-align: center'],
+                'headerOptions'  => ['class' => 'text-center', 'width' => '100'],
+            ],
+            [
+                'attribute'     => 'username',
+                'headerOptions' => ['class' => 'text-center', 'width' => '200'],
+            ],
             'email:email',
             [
-                'filter' => User::getStatusesArray(),
-                'attribute' => 'status',
-                'format' => 'raw',
-                'value' => static function ($model, $key, $index, $column) {
+                'filter'        => User::getStatusesArray(),
+                'attribute'     => 'status',
+                'format'        => 'raw',
+                'headerOptions' => ['class' => 'text-center', 'width' => '180'],
+                'value'         => static function ($model, $key, $index, $column) {
                     /** @var User $model */
                     /** @var DataColumn $column */
                     $value = $model->{$column->attribute};
@@ -55,22 +62,32 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'attribute' => 'created_at',
-                'format'    => ['date', 'php:d-m-Y H:i:s'],
+                'attribute'     => 'created_at',
+                'format'        => ['date', 'php:d-m-Y H:i:s'],
+                'contentOptions' => ['style' => 'text-align: right'],
+                'headerOptions' => ['class' => 'text-center', 'width' => '100'],
             ],
             [
-                'attribute' => 'updated_at',
-                'format'    => ['date', 'php:d-m-Y H:i:s'],
+                'attribute'     => 'updated_at',
+                'format'        => ['date', 'php:d-m-Y H:i:s'],
+                'contentOptions' => ['style' => 'text-align: right'],
+                'headerOptions' => ['class' => 'text-center', 'width' => '100'],
             ],
-            'avatar',
             [
-                'class'      => ActionColumn::class,
-                'urlCreator' => static function ($action, User $model, $key, $index, $column) {
+                'attribute'     => 'avatar',
+                'headerOptions' => ['class' => 'text-center', 'width' => '100'],
+            ],
+            [
+                'class'         => ActionColumn::class,
+                'contentOptions' => ['style' => 'text-align: center'],
+                'headerOptions' => ['class' => 'text-center', 'width' => '100'],
+                'urlCreator'    => static function ($action, User $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                 }
+
             ],
         ],
-    ]); ?>
+    ]) ?>
 
     <?php Pjax::end(); ?>
 
