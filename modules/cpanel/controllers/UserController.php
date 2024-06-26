@@ -2,9 +2,12 @@
 
 namespace app\modules\cpanel\controllers;
 
+use app\modules\user\models\backend\CreateUser;
+use app\modules\user\models\SignupForm;
 use app\modules\user\models\User;
 use app\modules\cpanel\models\SearchUser;
 use Throwable;
+use Yii;
 use yii\db\Exception;
 use yii\db\StaleObjectException;
 use yii\web\Controller;
@@ -72,15 +75,16 @@ class UserController extends Controller
      */
     public function actionCreate(): Response|string
     {
-        $model = new User();
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+        $model = new CreateUser();
+            
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->create()) {
+//                Yii::$app->getSession()->setFlash('success', 'Подтвердите ваш электронный адрес.');
+                $id = Yii::$app->db->getLastInsertID();
+                return $this->redirect(['view', 'id' => $id]);
             }
-        } else {
-            $model->loadDefaultValues();
         }
+
 
         return $this->render('create', [
             'model' => $model,

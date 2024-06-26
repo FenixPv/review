@@ -86,6 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
 
             ],
+            'password_hash',
         ],
     ]) ?>
 
